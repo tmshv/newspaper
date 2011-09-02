@@ -8,8 +8,7 @@ package{
 	import flash.geom.Rectangle;
 	
 	import ru.gotoandstop.newspaper.Newspaper;
-	import ru.gotoandstop.newspaper.types.PaperAlign;
-	
+	import ru.gotoandstop.newspaper.types.AlignType;
 	
 	/**
 	 *
@@ -32,9 +31,19 @@ package{
 			
 			Newspaper.init(super.stage, super.stage.stageWidth, super.stage.stageHeight);
 			
-			var left:DisplayObject = this.getRectangle(new Rectangle(0, 0, 100, 150));
-			super.addChild(left);
-			Newspaper.add(left, super.stage, null, 10, 10, PaperAlign.LEFT, PaperAlign.TOP);
+			var top_left:DisplayObject = this.getRectangle(new Rectangle(0, 0, 10, 10));
+			var top_right:DisplayObject = this.getRectangle(new Rectangle(0, 0, 10, 10));
+			var bottom_right:DisplayObject = this.getRectangle(new Rectangle(0, 0, 10, 10));
+			var bottom_left:DisplayObject = this.getRectangle(new Rectangle(0, 0, 10, 10));
+			super.addChild(top_left);
+			super.addChild(top_right);
+			super.addChild(bottom_left);
+			super.addChild(bottom_right);
+			
+			Newspaper.add(top_left, super.stage, null, 10, 10, AlignType.LEFT, AlignType.TOP);
+			Newspaper.add(top_right, super.stage, null, 10, 10, AlignType.RIGHT, AlignType.TOP);
+			Newspaper.add(bottom_left, super.stage, null, 10, 10, AlignType.LEFT, AlignType.BOTTOM);
+			Newspaper.add(bottom_right, super.stage, null, 10, 10, AlignType.RIGHT, AlignType.BOTTOM);
 		}
 		
 		private function getRectangle(rect:Rectangle):DisplayObject{
