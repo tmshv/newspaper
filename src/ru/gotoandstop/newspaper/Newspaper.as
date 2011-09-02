@@ -1,59 +1,58 @@
-﻿/*
-autor: Timashev Roman
-version: beta
-date: 2oo8
-*/
-
-package ru.gotoandstop.newspaper{
+﻿package ru.gotoandstop.newspaper{
 	import __AS3__.vec.Vector;
 	
 	import flash.display.DisplayObject;
 	import flash.display.Stage;
 	import flash.events.Event;
+	import flash.events.IEventDispatcher;
 	
 	import ru.gotoandstop.newspaper.types.PaperAlign;
 	
+	/**
+	 *
+	 * Developed since 2008
+	 * @version: 2.0
+	 * @author Roman Timashev (roman@tmshv.ru)
+	 */
 	public class Newspaper{
-		
-/* *******
-PROPERTIES
-**************************************************************************************** */
-		public static const VERSION:String = 'beta';
+		public static const VERSION:String = '2.0';
 		
 		public static var stage:Stage;
-		public static var nativeStageWidth:int;
-		public static var nativeStageHeight:int;
+		public static var nativeStageWidth:uint;
+		public static var nativeStageHeight:uint;
 		
 		private static var __conllection:Vector.<Block>;
 		private static var __initialized:Boolean;
-/* ********
-CONSTRUCTOR
-**************************************************************************************** */
+		
 		public function Newspaper(){
-			/*if(Newspaper.stage == null){
-				throw new Error('Property stage is null');
-			}
-			
-			if(Newspaper.nativeStageWidth == 0 || Newspaper.nativeStageHeight == 0){
-				throw new Error('Native stage dimension is null');
-			}*/
+			throw new Error('You cannot create instance of Newspaper.');
 		}
 		
-/* ***********
-PUBLIC METHODS
-**************************************************************************************** */
-		public static function init():void{
+		public static function init(stage:Stage, nativeStageWidth:uint, nativeStageHeight):void{
 			if(Newspaper.__initialized) return;
-			else{
-				Newspaper.__initialized = true;
-				Newspaper.__conllection = new Vector.<Block>();
-			}
+			
+			Newspaper.__initialized = true;
+			Newspaper.__conllection = new Vector.<Block>();
+			Newspaper.stage = stage;
+			Newspaper.nativeStageWidth = nativeStageWidth;
+			Newspaper.nativeStageHeight = nativeStageHeight;
 			
 			Newspaper.stage.addEventListener(Event.RESIZE, handlerResize);
 		}
 
-		public static function addBlock(object:DisplayObject,
-										target:DisplayObject,
+		/**
+		 * 
+		 * @param object
+		 * @param target
+		 * @param callback
+		 * @param offsetX
+		 * @param offsetY
+		 * @param alignX
+		 * @param alignY
+		 * 
+		 */
+		public static function add(object:DisplayObject,
+										relativeTarget:DisplayObject,
 										callback:Function=null,
 										offsetX:uint=0,
 										offsetY:uint=0,
@@ -68,9 +67,9 @@ PUBLIC METHODS
 			e.screenAlignX = alignX;
 			e.screenAlignY = alignY;
 			
-			var b:Block = new Block(object, target, e, callback);
+			var b:Block = new Block(object, relativeTarget, e, callback);
 			Newspaper.__conllection.push(b);
-			Newspaper.position(object, target, e);
+			Newspaper.position(object, relativeTarget, e);
 		}
 		
 		public static function addEditor(object:DisplayObject, target:DisplayObject, editor:Editor, callback:Function=null):void{
