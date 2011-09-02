@@ -1,5 +1,5 @@
 package ru.gotoandstop.newspaper.types{
-	public class PaperAlign{
+	public class AlignType{
 		public static const LEFT:String = 'left';
 		public static const RIGHT:String = 'right';
 		public static const TOP:String = 'top';
