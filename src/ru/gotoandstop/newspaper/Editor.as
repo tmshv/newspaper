@@ -1,7 +1,7 @@
 ﻿/* ***	© 2oo8 Timashev Roman *** */
 
 package ru.gotoandstop.newspaper{
-	import ru.gotoandstop.newspaper.types.PaperAlign;
+	import ru.gotoandstop.newspaper.types.AlignType;
 	
 	public class Editor{
 		
@@ -158,7 +158,7 @@ PUBLIC GETTERES & SETTERS
 PRIVATE METHODS
 **************************************************************************************** */
 		private function checkAlignValidity(align:String):Boolean{
-			if(align == PaperAlign.BOTTOM || align == PaperAlign.CENTER || align == PaperAlign.LEFT || align == PaperAlign.RIGHT || align == PaperAlign.TOP) return true;
+			if(align == AlignType.BOTTOM || align == AlignType.CENTER || align == AlignType.LEFT || align == AlignType.RIGHT || align == AlignType.TOP) return true;
 			else return false;
 		}
 		

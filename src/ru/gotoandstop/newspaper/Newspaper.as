@@ -6,7 +6,7 @@
 	import flash.events.Event;
 	import flash.events.IEventDispatcher;
 	
-	import ru.gotoandstop.newspaper.types.PaperAlign;
+	import ru.gotoandstop.newspaper.types.AlignType;
 	
 	/**
 	 *
@@ -28,7 +28,7 @@
 			throw new Error('You cannot create instance of Newspaper.');
 		}
 		
-		public static function init(stage:Stage, nativeStageWidth:uint, nativeStageHeight):void{
+		public static function init(stage:Stage, nativeStageWidth:uint, nativeStageHeight:uint):void{
 			if(Newspaper.__initialized) return;
 			
 			Newspaper.__initialized = true;
@@ -96,22 +96,22 @@
 			var offsetY:int = editor.offsetY;
 				
 			//Вычисление итогового смещения
-			if(editor.objectAlignX == PaperAlign.RIGHT)		offsetX += object.width;
-			if(editor.objectAlignY == PaperAlign.BOTTOM)	offsetY += object.height;
+			if(editor.objectAlignX == AlignType.RIGHT)		offsetX += object.width;
+			if(editor.objectAlignY == AlignType.BOTTOM)	offsetY += object.height;
 			if(editor.scalePositionX)						offsetX *= (Newspaper.stage.stageWidth / Newspaper.nativeStageWidth);
 			if(editor.scalePositionY)						offsetY *= (Newspaper.stage.stageHeight / Newspaper.nativeStageHeight);
 			
 			//Смещение
 			switch(editor.screenAlignX){
-				case PaperAlign.LEFT:	object.x = offsetX; break;
-				case PaperAlign.RIGHT:	object.x = Newspaper.stage.stageWidth - offsetX; break;
-				case PaperAlign.CENTER:	object.x = (Newspaper.stage.stageWidth - object.width) / 2;
+				case AlignType.LEFT:	object.x = offsetX; break;
+				case AlignType.RIGHT:	object.x = Newspaper.stage.stageWidth - offsetX; break;
+				case AlignType.CENTER:	object.x = (Newspaper.stage.stageWidth - object.width) / 2;
 			}
 			
 			switch(editor.screenAlignY){
-				case PaperAlign.TOP:	object.y = offsetY; break;
-				case PaperAlign.BOTTOM:	object.y = Newspaper.stage.stageHeight - offsetY; break;
-				case PaperAlign.CENTER:	object.y = (Newspaper.stage.stageHeight - object.height) / 2;
+				case AlignType.TOP:	object.y = offsetY; break;
+				case AlignType.BOTTOM:	object.y = Newspaper.stage.stageHeight - offsetY; break;
+				case AlignType.CENTER:	object.y = (Newspaper.stage.stageHeight - object.height) / 2;
 			}
 		}
 		
